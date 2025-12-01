@@ -32,30 +32,31 @@ data class Rotation(
             return Rotation(parseDirection(s[0]), s.substring(1).toInt())
         }
     }
+
+    fun apply(i: Int): Int =
+        i + ((quantity) * direction.multiplier)
 }
 
 class Safe(private var position: Int = 50, private val limit: Int = 100) {
-    fun applyRotation(rotation: Rotation): Int {
-        position = (limit + position + ((rotation.quantity) * rotation.direction.multiplier)) % limit
+    fun rotate(rotation: Rotation): Int {
+        position = rotation.apply(limit + position) % limit
         return position
     }
 
-    fun applyRotationTrackSecret(rotation: Rotation): Int {
-        val oldPosition = position
-        val newPos = (position + ((rotation.quantity) * rotation.direction.multiplier))
-        applyRotation(rotation)
-        val rng = IntProgression.fromClosedRange(oldPosition, newPos, rotation.direction.multiplier)
-        val cnt = rng.drop(1).count { it % limit == 0 }
-        return cnt
+    fun rotationTrackSecret(rotation: Rotation): Int {
+        val newPos = rotation.apply(position)
+        return IntProgression.fromClosedRange(position, newPos, rotation.direction.multiplier).drop(1)
+            .count { it % limit == 0 }.also {
+                rotate(rotation)
+            }
     }
 
-    fun applyRotationsWithSecret(rotations: List<Rotation>, secretKey: Int): Int {
-        return rotations.map { applyRotation(it) }.count { it == secretKey }
+    fun countSecrets(rotations: List<Rotation>, secretKey: Int): Int {
+        return rotations.count { rotate(it) == secretKey }
     }
 
-    fun applyRotationsCountCrossSecret(rotations: List<Rotation>, secretKey: Int): Int {
-        val rots = rotations.map { applyRotationTrackSecret(it) }
-        return rots.sum()
+    fun countCrossSecrets(rotations: List<Rotation>, secretKey: Int): Int {
+        return rotations.sumOf { rotationTrackSecret(it) }
     }
 
 }
@@ -80,11 +81,11 @@ class Day1 {
 
     fun part1(input: List<Rotation>): Int {
         val safe = Safe()
-        return safe.applyRotationsWithSecret(input, 0)
+        return safe.countSecrets(input, 0)
     }
 
     fun part2(input: List<Rotation>): Int {
         val safe = Safe()
-        return safe.applyRotationsCountCrossSecret(input, 0)
+        return safe.countCrossSecrets(input, 0)
     }
 }
