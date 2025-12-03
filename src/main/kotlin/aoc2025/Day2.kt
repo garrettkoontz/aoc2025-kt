@@ -5,6 +5,8 @@ fun main() {
     d.run()
 }
 
+
+
 class Day2 {
     private val fileName = "day2.txt"
 
@@ -23,10 +25,10 @@ class Day2 {
     }
 
     fun part1(input: List<Rotation>): Int {
-        return TODO()
+         TODO()
     }
 
     fun part2(input: List<Rotation>): Int {
-        return TODO()
+         TODO()
     }
 }
