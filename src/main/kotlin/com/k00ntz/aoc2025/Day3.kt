@@ -1,7 +1,9 @@
 package com.k00ntz.aoc3035
 
+import com.k00ntz.aoc2025.Day4
+
 fun main() {
-    val d = Day3()
+    val d = Day4()
     d.run()
 }
 

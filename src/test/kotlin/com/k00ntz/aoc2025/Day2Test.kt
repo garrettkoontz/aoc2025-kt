@@ -1,7 +1,7 @@
-package aoc2025
+package com.k00ntz.aoc2025
 
-import com.k00ntz.aoc2025.Day2
-import com.k00ntz.aoc2025.Range
+import com.k00ntz.com.k00ntz.aoc2025.Day2
+import com.k00ntz.com.k00ntz.aoc2025.Range
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 

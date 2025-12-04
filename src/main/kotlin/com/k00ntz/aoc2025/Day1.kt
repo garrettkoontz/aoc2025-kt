@@ -1,7 +1,5 @@
-package com.k00ntz.aoc2025
+package com.k00ntz.com.k00ntz.aoc2025
 
-import com.k00ntz.aoc2025.Direction.L
-import com.k00ntz.aoc2025.Direction.R
 import java.lang.RuntimeException
 
 fun main() {
@@ -16,8 +14,8 @@ enum class Direction(val multiplier: Int) {
 
 fun parseDirection(c: Char): Direction {
     return when (c) {
-        'L' -> L
-        'R' -> R
+        'L' -> Direction.L
+        'R' -> Direction.R
         else -> throw RuntimeException("Invalid direction $c")
     }
 }
