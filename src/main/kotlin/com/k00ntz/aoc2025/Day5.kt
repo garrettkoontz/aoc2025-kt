@@ -1,15 +1,69 @@
 package com.k00ntz.com.k00ntz.aoc2025
 
+import java.util.SortedSet
+
 fun main() {
     val d = Day5()
     d.run()
 }
 
-data class KitchenIngredient(val ranges: List<LongRange>, val ingredients: List<Long>){
+data class KitchenIngredient(val ranges: List<LongRange>, val ingredients: List<Long>) {
+    val consolidatedRanges = getFreshRanges()
+
     fun countFresh(): Int =
         ingredients.count { i -> ranges.any { r -> r.contains(i) } }
 
-    fun getFreshRanges
+    private fun getFreshRanges(): SortedSet<LongRange> {
+        return ranges.drop(1)
+            .fold(
+                setOf(ranges.first())
+                    .toSortedSet { o1, o2 -> o1.first.compareTo(o2.first) }) { acc, longs ->
+                acc.addRange(longs)
+            }
+
+    }
+
+    private fun SortedSet<LongRange>.addRange(other: LongRange): SortedSet<LongRange> {
+        val first = other.first
+        val last = other.last
+        val containsFirst = this.firstOrNull { it.contains(first) }
+        val containsLast = this.firstOrNull { it.contains(last) }
+        if (containsFirst != null && containsLast != null) {
+            // This new range is completely contained within a current range
+            if (containsFirst == containsLast) {
+                return this
+            } else {
+                // This new range connects a gap between other existing ranges
+                val removes = this.subSet(containsFirst, containsLast)
+                removes.forEach { this.remove(it) }
+                this.remove(containsLast)
+                this.add(containsFirst.first..containsLast.last)
+                return this
+            }
+        }
+        // This new range is on one edge of the current ranges
+        if (containsFirst != null) {
+            val subSet = this.tailSet(containsFirst)
+            val (removes, _) = subSet.partition { it.first < last }
+            removes.forEach { this.remove(it) }
+            this.add(containsFirst.first..last)
+            return this
+        } else if (containsLast != null) {
+            // containsLast != null
+            val subSet = this.headSet(containsLast)
+            val (removes, _) = subSet.partition { it.last > first }
+            removes.forEach { this.remove(it) }
+            this.remove(containsLast)
+            this.add(first..containsLast.last)
+            return this
+        } else {
+            val removes = this.filter { it.first > first && it.last < last }
+            removes.forEach { this.remove(it) }
+            this.add(first..last)
+            return this
+        }
+    }
+
 }
 
 fun parseIngredients(input: List<String>): KitchenIngredient {
@@ -40,7 +94,9 @@ class Day5 {
         return input.countFresh()
     }
 
-    fun part2(input: KitchenIngredient): Int {
-        return 0
-    }
+    fun part2(input: KitchenIngredient): Long =
+        input.consolidatedRanges.sumOf { it.last - it.first + 1 }
 }
+
+private fun SortedSet<LongRange>.containsValue(first: Long): Boolean =
+    this.any { it.contains(first) }
