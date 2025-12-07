@@ -13,6 +13,8 @@ fun measureAndPrintTime(block: () -> Unit) {
 fun Pair<Int, Int>.sum() =
     this.first + this.second
 
+fun <T> List<T>.getAllIndicesOf(v: T): List<Int> =
+    this.withIndex().filter { it.value == v }.map { it.index }
 
 fun List<CharArray>.getPoint(pt: Point): Char =
     this[pt.y()][pt.x()]
