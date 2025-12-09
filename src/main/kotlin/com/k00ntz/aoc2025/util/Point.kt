@@ -5,6 +5,7 @@ import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.math.atan2
 import kotlin.math.sqrt
+import kotlin.text.toDouble
 
 
 typealias Point = Pair<Int, Int>
@@ -197,4 +198,22 @@ fun Point.getAngleNeighbors(input: List<List<Char>>): Set<Point> {
             }
     }
     return neighbors.toSet()
+}
+
+typealias Point3D = Triple<Int, Int, Int>
+
+fun Point3D.x(): Int =
+    this.first
+
+fun Point3D.y(): Int =
+    this.second
+
+fun Point3D.z(): Int =
+    this.third
+
+fun Point3D.distanceTo(other: Point3D): Double {
+    val xDiff = (this.x() - other.x()).toDouble()
+    val yDiff = (this.y() - other.y()).toDouble()
+    val zDiff = (this.z() - other.z()).toDouble()
+    return sqrt(xDiff * xDiff + yDiff * yDiff + zDiff * zDiff)
 }
