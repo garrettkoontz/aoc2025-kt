@@ -42,8 +42,8 @@ data class Tachyon(val start: Int, val splitters: List<Set<Int>>) {
                     pairs.add(Pair(splitter.key, splitter.value))
                 }
             }
-            pairs.groupBy { it.first } // Group by key
-                .mapValues { entry -> entry.value.sumOf { it.second } } // Map values to a list of original values
+            pairs.groupBy { it.first }
+                .mapValues { entry -> entry.value.sumOf { it.second } }
 
         }
         return end
