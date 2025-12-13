@@ -1,6 +1,7 @@
-package com.k00ntz.com.k00ntz.aoc2025
+package com.k00ntz.aoc2025
 
 import com.k00ntz.aoc2025.util.getAllIndicesOf
+import kotlin.collections.iterator
 
 fun main() {
     val d = Day7()

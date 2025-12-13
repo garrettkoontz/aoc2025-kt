@@ -1,11 +1,9 @@
-package com.k00ntz.com.k00ntz.aoc2025
+package com.k00ntz.aoc2025
 
 import com.k00ntz.aoc2025.util.Point3D
 import com.k00ntz.aoc2025.util.distanceTo
 import com.k00ntz.aoc2025.util.x
-import java.util.Collections
 import java.util.NavigableMap
-import java.util.SortedMap
 
 fun main() {
     val d = Day8()

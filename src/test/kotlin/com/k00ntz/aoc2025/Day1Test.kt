@@ -1,7 +1,7 @@
 package com.k00ntz.aoc2025
 
-import com.k00ntz.com.k00ntz.aoc2025.Day1
-import com.k00ntz.com.k00ntz.aoc2025.Rotation
+import com.k00ntz.aoc2025.Day1
+import com.k00ntz.aoc2025.Rotation
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 

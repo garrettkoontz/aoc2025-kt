@@ -1,4 +1,4 @@
-package com.k00ntz.com.k00ntz.aoc2025
+package com.k00ntz.aoc2025
 
 import java.util.SortedSet
 

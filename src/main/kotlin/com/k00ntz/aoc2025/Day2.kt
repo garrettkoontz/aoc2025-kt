@@ -1,4 +1,4 @@
-package com.k00ntz.com.k00ntz.aoc2025
+package com.k00ntz.aoc2025
 
 fun main() {
     val d = Day2()

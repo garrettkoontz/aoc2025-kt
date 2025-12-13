@@ -1,6 +1,4 @@
-package com.k00ntz.aoc3035
-
-import com.k00ntz.aoc2025.Day4
+package com.k00ntz.aoc2025
 
 fun main() {
     val d = Day4()

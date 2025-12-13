@@ -1,7 +1,5 @@
 package com.k00ntz.aoc2025
 
-import com.k00ntz.com.k00ntz.aoc2025.Day5
-import com.k00ntz.com.k00ntz.aoc2025.KitchenIngredient
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 

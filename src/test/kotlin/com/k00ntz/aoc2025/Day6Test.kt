@@ -1,7 +1,5 @@
 package com.k00ntz.aoc2025
 
-import com.k00ntz.com.k00ntz.aoc2025.Day6
-import com.k00ntz.com.k00ntz.aoc2025.parseProblems
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 

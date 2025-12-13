@@ -154,3 +154,81 @@ fun <T> List<T>.ringIndexOf(t: T): Int =
 
 fun <T> List<T>.ringIndex(i: Int): Int =
     (i + size) % size
+
+
+class GuassJordanElimination {
+    // function to reduce matrix to reduced
+// row echelon form.
+    fun performOperation(a: Array<FloatArray?>?, order: Int): Int {
+        var j: Int
+        var k = 0
+        var c: Int
+        var flag = 0
+
+
+        // Performing elementary operations
+        var i = 0
+        while (i < order) {
+            if (a!![i]!![i] == 0f) {
+                c = 1
+                while ((i + c) < order && a[i + c]!![i] == 0f) c++
+                if ((i + c) == order) {
+                    flag = 1
+                    break
+                }
+                j = i
+                k = 0
+                while (k <= order) {
+                    val temp = a[j]!![k]
+                    a[j]!![k] = a[j + c]!![k]
+                    a[j + c]!![k] = temp
+                    k++
+                }
+            }
+
+            j = 0
+            while (j < order) {
+                // Excluding all i == j
+                if (i != j) {
+                    // Converting Matrix to reduced row
+                    // echelon form(diagonal matrix)
+
+                    val p = a[j]!![i] / a[i]!![i]
+
+                    k = 0
+                    while (k <= order) {
+                        a[j]!![k] = a[j]!![k] - (a[i]!![k]) * p
+                        k++
+                    }
+                }
+                j++
+            }
+            i++
+        }
+        return flag
+    }
+
+    fun checkConsistency(a: Array<FloatArray?>?, n: Int, flag: Int): Int {
+        var flag = flag
+        var j: Int
+        var sum: Float
+
+
+        // flag == 2 for infinite solution
+        // flag == 3 for No solution
+        flag = 3
+        var i: Int = 0
+        while (i < n) {
+            sum = 0f
+            j = 0
+            while (j < n) {
+                sum += a!![i]!![j]
+                j++
+            }
+            if (sum == a!![i]!![j]) flag = 2
+            i++
+        }
+        return flag
+    }
+
+}

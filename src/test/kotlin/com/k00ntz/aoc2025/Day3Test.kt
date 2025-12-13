@@ -1,7 +1,5 @@
 package com.k00ntz.aoc2025
 
-import com.k00ntz.aoc3035.BatteryBank
-import com.k00ntz.aoc3035.Day3
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
